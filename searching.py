@@ -18,11 +18,25 @@ def read_data(file_name, field):
     if field in set(data.keys()):
         return data[field]
 
+def linear_search(unordered_numbers, hledane_cislo):
+    positions = []
+    count = 0
+    for position, number in enumerate(unordered_numbers):
+        if number == hledane_cislo:
+            positions.append(position)
+            count += 1
+
+    output = dict()
+    output["positions"] = positions
+    output["count"] = count
+    return output
+
 
 def main():
     unordered_numbers = read_data("sequential.json", "unordered_numbers")
     print(unordered_numbers)
-
+    output_dict = linear_search(unordered_numbers, 5)
+    print(output_dict)
 
 
 if __name__ == '__main__':
