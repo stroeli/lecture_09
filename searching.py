@@ -33,14 +33,18 @@ def linear_search(unordered_numbers, hledane_cislo):
     return output
 
 def pattern_search(dna_sequence, hledany_vzor):
-    positions = []
-    for i in range(0, len(dna_sequence) - 2):
-        dna_substring = dna_sequence[i:i + 3]
-        if dna_substring == hledany_vzor:
-            positions.append(i)
-    mnozina_pozic = set(positions)
+    positions = set()
+    for i in range(0, len(dna_sequence) - len(hledany_vzor) + 1):
+        subsequence = dna_sequence[i:(i+len(hledany_vzor))]
+        same = True
+        for letter_subsequence, letter_hledany_vzor in zip(subsequence, hledany_vzor):
+            if letter_subsequence != letter_hledany_vzor:
+                same = False
+                break
+        if same:
+            positions.add(i)
 
-    return mnozina_pozic
+    return positions
 
 def main():
     unordered_numbers = read_data("sequential.json", "unordered_numbers")
